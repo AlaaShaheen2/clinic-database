@@ -35,3 +35,22 @@ CREATE TABLE treatments (
   name VARCHAR (50),
   PRIMARY KEY(id)
 );
+
+CREATE TABLE medical_hitories_treatments(
+  treatments_id INT,
+  medical_hitories_id INT,
+  PRIMARY KEY(treatments_id,medical_hitories_id),
+  FOREIGN key (treatments_id) REFERENCES treatments(id),
+  FOREIGN key (medical_hitories_id) REFERENCES medical_histories(id)
+);
+CREATE TABLE invoice_items (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  unit_price DECIMAL(5,2),
+  quantity INT,
+  total_price DECIMAL(3,4),
+  invoice_id INT,
+  treatment_id INT,
+  PRIMARY KEY(id),
+  FOREIGN key (invoice_id) REFERENCES invoices(id),
+  FOREIGN key (treatment_id) REFERENCES treatments(id)
+);
